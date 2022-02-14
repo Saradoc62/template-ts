@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title><%= htmlWebpackPlugin.options.title %></title>
     <!-- support for mobile touch devices -->
-    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
-</head>
-<body>
-    <h1>Title</h1>
-</body>
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+  </head>
+  <body>
+    <div id="background" class="bg-image"></div>
+    <div class="container">
+      <div class="clock-container">
+        <img id="image" src="./assets/sun_icon.png" alt="" />
+        <div id="display" class="clock-display"></div>
+      </div>
+      <div class="button-container">
+        <div id="increase"></div>
+        <div id="mode"></div>
+        <div id="lightDark"></div>
+      </div>
+    </div>
+  </body>
 </html>
