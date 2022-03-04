@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title><%= htmlWebpackPlugin.options.title %></title>
     <!-- support for mobile touch devices -->
-    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
-</head>
-<body>
-    <h1>Title</h1>
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+  </head>
+  <body>
+    <h1>Aurelia's Watch</h1>
+    <div id="watch"></div>
+    <input type="button" value="Mode" id="modeButton" style="background-color: blue; border-color: blue"></input>
+    <input type="button" value="Increase" id="increaseButton" style="background-color: cyan; border-color: cyan"></input>
+    <br/>
+    <input type="button" value="Light" id="lightButton" style="background-color: yellow; border-color: yellow"></input>
+    <br/>
+    <input type="button" value="Reset" id="resetButton" style="background-color: red; border-color: red"></input>
+    <br/>
+    <input type="button" value="AM / PM" id="ampmButton" style="background-color: orange; border-color: orange"></input>
 </body>
 </html>
