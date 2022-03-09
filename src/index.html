@@ -11,14 +11,41 @@
   </head>
   <body>
     <h1>Aurelia's Watch</h1>
-    <div id="watch"></div>
+    <input type="button" onclick="cloning()" value="Add Watch" id="addWatchButton" style="background-color: azure; border-color: azure"></input>
+    <br/>
+    <br/>
+
+    <div id="demo" style="border:1px solid black;background-color:white">
+
+    <b id="watchName"></b>
+    <div id="watch" class="test"></div>
     <input type="button" value="Mode" id="modeButton" style="background-color: blue; border-color: blue"></input>
     <input type="button" value="Increase" id="increaseButton" style="background-color: cyan; border-color: cyan"></input>
     <br/>
-    <input type="button" value="Light" id="lightButton" style="background-color: yellow; border-color: yellow"></input>
+    <input type="button"  value="Light" id="lightButton" style="background-color: yellow; border-color: yellow"></input>
     <br/>
     <input type="button" value="Reset" id="resetButton" style="background-color: red; border-color: red"></input>
     <br/>
     <input type="button" value="AM / PM" id="ampmButton" style="background-color: orange; border-color: orange"></input>
+    <br/><br/>
+</div>
+
+
+
+    <script>
+        function cloning(){
+            this.clockNumber++;
+            //globalThis.currentMode.length = globalThis.clockNumber + 1;
+            var node = document.getElementById("demo");
+            var clone = node.cloneNode(true);
+            for (let i = 0; i < clone.childNodes.length; i++){
+                clone.childNodes[i].id = clone.childNodes[i].id + globalThis.clockNumber;
+
+                //console.log(clone.childNodes[i].id);
+            }
+            document.body.appendChild(clone);
+
+        }
+        </script>
 </body>
 </html>
