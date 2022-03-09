@@ -1,3 +1,16 @@
 h1 {
-    color: red;
+  color: red;
+}
+body {
+  padding: 25px;
+  background-color: white;
+  color: black;
+  font-size: 25px;
+}
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+input {
+  font-size: 20px;
 }
