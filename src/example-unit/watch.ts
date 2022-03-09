@@ -3,16 +3,37 @@ export class Watch {
   watch: Element;
   watchNum: number;
   currentMode: number = 0;
-  increasedMinutes: number = 0;
-  increasedHours: number = 0;
+  increasedMinutes: number;
+  increasedHours: number;
+  hoursOffset: number;
+  minutesOffset: number;
   ampm: boolean = false;
-  watchName : Element;
+  watchName: Element;
 
-  constructor(currentWatch: any, watchNumber: any, currentNameElement : any, currentName: string) {
+  constructor(
+    currentWatch: any,
+    watchNumber: any,
+    currentNameElement: any,
+    currentName: string,
+    currentTimeZone: string
+  ) {
+    // Setup display elements
     this.watch = currentWatch;
     this.watchNum = watchNumber;
     this.watchName = currentNameElement;
     this.watchName.textContent = currentName;
+
+    // Setup necessary variables
+    this.hoursOffset = parseInt(currentTimeZone.substring(0, 3));
+    if (this.hoursOffset < 0 && parseInt(currentTimeZone.substring(4, 6)) > 0) {
+      this.hoursOffset += 4;
+    } else {
+      this.hoursOffset += 5;
+    }
+    this.minutesOffset = parseInt(currentTimeZone.substring(4, 6));
+
+    this.increasedHours = this.hoursOffset;
+    this.increasedMinutes = this.minutesOffset;
 
     // Update the Watch every 1000 ms
     setInterval(() => this.startWatch(), 1000);
@@ -26,18 +47,21 @@ export class Watch {
     buttonMode.addEventListener("click", (e: Event) => this.setMode());
 
     // Create button listener for Increase
-    let buttonIncrease = document.getElementById("increaseButton" + watchNumber);
+    let buttonIncrease = document.getElementById(
+      "increaseButton" + watchNumber
+    );
     buttonIncrease.addEventListener("click", (e: Event) => this.increaseTime());
 
     // Create button listener for Light
     let buttonLight = document.getElementById("lightButton" + watchNumber);
     buttonLight.addEventListener("click", (e: Event) => this.toggleLight());
 
-     // Create button listener for Reset
-     let buttonReset = document.getElementById("resetButton" + watchNumber);
-     buttonReset.addEventListener("click", (e: Event) => this.reset());
+    // Create button listener for Reset
+    let buttonReset = document.getElementById("resetButton" + watchNumber);
+    buttonReset.addEventListener("click", (e: Event) => this.reset());
   }
 
+  // Functions
   // Start the clock
   startWatch() {
     // Get current Date
@@ -72,7 +96,6 @@ export class Watch {
     // Display by updating the element with the correct time
     var currentTime;
     var moment = "";
-    //console.log(this.ampm);
     if (this.ampm) {
       moment = " AM";
       if (Number(hours) > 12) {
@@ -132,15 +155,15 @@ export class Watch {
     }
   }
 
-   // Toggle the light mode
-   toggleLight() {
+  // Toggle the light mode
+  toggleLight() {
     this.watch.classList.toggle("dark-mode");
   }
 
   // Reset Watch
   reset() {
     this.currentMode = 0;
-    this.increasedMinutes = 0;
-    this.increasedHours = 0;
+    this.increasedMinutes = this.minutesOffset;
+    this.increasedHours = this.hoursOffset;
   }
 }

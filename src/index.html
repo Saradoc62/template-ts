@@ -10,42 +10,89 @@
     />
   </head>
   <body>
-    <h1>Aurelia's Watch</h1>
-    <input type="button" onclick="cloning()" value="Add Watch" id="addWatchButton" style="background-color: azure; border-color: azure"></input>
+    <h1>Aurelia's Watches</h1>
+    <p>If you want to add a new watch with another time zone, select the time zone wanted in the dropdown menu below and click on the "Add Watch" button </p>
+    
+    <select name="time-zone" id="time-zone">
+      <option value="-12:00">(GMT -12:00) Eniwetok, Kwajalein</option>
+      <option value="-11:00">(GMT -11:00) Midway Island, Samoa</option>
+      <option value="-10:00">(GMT -10:00) Hawaii</option>
+      <option value="-09:30">(GMT -9:30) Taiohae</option>
+      <option value="-09:00">(GMT -9:00) Alaska</option>
+      <option value="-08:00">(GMT -8:00) Pacific Time (US &amp; Canada)</option>
+      <option value="-07:00">(GMT -7:00) Mountain Time (US &amp; Canada)</option>
+      <option value="-06:00">(GMT -6:00) Central Time (US &amp; Canada), Mexico City</option>
+      <option value="-05:00" selected="selected">(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima</option>
+      <option value="-04:30">(GMT -4:30) Caracas</option>
+      <option value="-04:00">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</option>
+      <option value="-03:30">(GMT -3:30) Newfoundland</option>
+      <option value="-03:00">(GMT -3:00) Brazil, Buenos Aires, Georgetown</option>
+      <option value="-02:00">(GMT -2:00) Mid-Atlantic</option>
+      <option value="-01:00">(GMT -1:00) Azores, Cape Verde Islands</option>
+      <option value="+00:00">(GMT) Western Europe Time, London, Lisbon, Casablanca</option>
+      <option value="+01:00">(GMT +1:00) Brussels, Copenhagen, Madrid, Paris</option>
+      <option value="+02:00">(GMT +2:00) Kaliningrad, South Africa</option>
+      <option value="+03:00">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</option>
+      <option value="+03:30">(GMT +3:30) Tehran</option>
+      <option value="+04:00">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</option>
+      <option value="+04:30">(GMT +4:30) Kabul</option>
+      <option value="+05:00">(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</option>
+      <option value="+05:30">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</option>
+      <option value="+05:45">(GMT +5:45) Kathmandu, Pokhara</option>
+      <option value="+06:00">(GMT +6:00) Almaty, Dhaka, Colombo</option>
+      <option value="+06:30">(GMT +6:30) Yangon, Mandalay</option>
+      <option value="+07:00">(GMT +7:00) Bangkok, Hanoi, Jakarta</option>
+      <option value="+08:00">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</option>
+      <option value="+08:45">(GMT +8:45) Eucla</option>
+      <option value="+09:00">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</option>
+      <option value="+09:30">(GMT +9:30) Adelaide, Darwin</option>
+      <option value="+10:00">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option>
+      <option value="+10:30">(GMT +10:30) Lord Howe Island</option>
+      <option value="+11:00">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option>
+      <option value="+11:30">(GMT +11:30) Norfolk Island</option>
+      <option value="+12:00">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
+      <option value="+12:45">(GMT +12:45) Chatham Islands</option>
+      <option value="+13:00">(GMT +13:00) Apia, Nukualofa</option>
+      <option value="+14:00">(GMT +14:00) Line Islands, Tokelau</option>
+    </select>
+
+    <input type="button" onclick="cloning(), selectTimeZone()" value="Add Watch" id="addWatchButton" style="background-color: azure; border-color: azure"></input>
     <br/>
     <br/>
 
-    <div id="demo" style="border:1px solid black;background-color:white">
+    <div id="template" style="border:1px solid black;background-color:white">
 
-    <b id="watchName"></b>
-    <div id="watch" class="test"></div>
-    <input type="button" value="Mode" id="modeButton" style="background-color: blue; border-color: blue"></input>
-    <input type="button" value="Increase" id="increaseButton" style="background-color: cyan; border-color: cyan"></input>
-    <br/>
-    <input type="button"  value="Light" id="lightButton" style="background-color: yellow; border-color: yellow"></input>
-    <br/>
-    <input type="button" value="Reset" id="resetButton" style="background-color: red; border-color: red"></input>
-    <br/>
-    <input type="button" value="AM / PM" id="ampmButton" style="background-color: orange; border-color: orange"></input>
-    <br/><br/>
-</div>
+      <b id="watchName"></b>
+      <div id="watch" class="test"></div>
+      <input type="button" value="Mode" id="modeButton" style="background-color: blue; border-color: blue"></input>
+      <input type="button" value="Increase" id="increaseButton" style="background-color: cyan; border-color: cyan"></input>
+      <br/>
+      <input type="button"  value="Light" id="lightButton" style="background-color: yellow; border-color: yellow"></input>
+      <br/>
+      <input type="button" value="Reset" id="resetButton" style="background-color: red; border-color: red"></input>
+      <br/>
+      <input type="button" value="AM / PM" id="ampmButton" style="background-color: orange; border-color: orange"></input>
+      <br/><br/>
+    </div>
 
 
 
     <script>
-        function cloning(){
-            this.clockNumber++;
-            //globalThis.currentMode.length = globalThis.clockNumber + 1;
-            var node = document.getElementById("demo");
-            var clone = node.cloneNode(true);
-            for (let i = 0; i < clone.childNodes.length; i++){
-                clone.childNodes[i].id = clone.childNodes[i].id + globalThis.clockNumber;
-
-                //console.log(clone.childNodes[i].id);
-            }
-            document.body.appendChild(clone);
-
+      function cloning(){
+        this.clockNumber++;
+        var node = document.getElementById("template");
+        var clone = node.cloneNode(true);
+        for (let i = 0; i < clone.childNodes.length; i++){
+          clone.childNodes[i].id = clone.childNodes[i].id + globalThis.clockNumber;
         }
-        </script>
-</body>
+        document.body.appendChild(clone);
+      }
+
+      function selectTimeZone(){
+        var selectedTimeZone = document.getElementById("time-zone");
+        globalThis.timeZoneValue = selectedTimeZone.options[selectedTimeZone.selectedIndex].value;
+        globalThis.timeZoneName = selectedTimeZone.options[selectedTimeZone.selectedIndex].text;
+      }
+    </script>
+  </body>
 </html>
