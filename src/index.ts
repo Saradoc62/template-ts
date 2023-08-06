@@ -50,7 +50,10 @@ function setClock(
 ) {
   const watchContentElement = document.getElementById(clockId);
   if (watchContentElement) {
-    watchContentElement.innerHTML = data;
+    watchContentElement.innerHTML = data.replace(
+      /\${clockId}/g,
+      clockId + "animation",
+    );
   }
 
   const diagram = new Diagram(defaultMode, addedTime, 0, clockId);
@@ -91,6 +94,34 @@ function setClock(
   if (changeAmPm) {
     changeAmPm.addEventListener("click", () => {
       diagram.changeAmPm();
+    });
+  }
+
+  const rotate = watchContentElement.querySelector("#rotate");
+  if (rotate) {
+    rotate.addEventListener("click", () => {
+      diagram.activateRotation();
+    });
+  }
+
+  const flip = watchContentElement.querySelector("#flip");
+  if (flip) {
+    flip.addEventListener("click", () => {
+      diagram.activateFlip();
+    });
+  }
+
+  const multiply = watchContentElement.querySelector("#multiply");
+  if (multiply) {
+    multiply.addEventListener("click", () => {
+      diagram.multiply();
+    });
+  }
+
+  const translate = watchContentElement.querySelector("#translate");
+  if (translate) {
+    translate.addEventListener("click", () => {
+      diagram.activateTranslation();
     });
   }
 }

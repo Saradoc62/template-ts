@@ -16,9 +16,20 @@ export class Diagram {
   private format = "24h";
   private actualFormat = "";
 
+  // animation
+  private rotationAngle = 0;
+  private isRotation = false;
+  private isFlip = false;
+  private flip = -1;
+  private multiplyTarget = 0;
+  private isTranslating = false;
+  private translationX = 0;
+
   public initClock = () => {
     this.initDate = new Date();
     this.clockElement = document.getElementById(this.clockId);
+    console.log(this.clockId);
+
     this.initOffset = this.initOffset + this.addedHours;
   };
 
@@ -51,6 +62,57 @@ export class Diagram {
       this.addedHours = this.addedHours + 1;
     }
     clockSeconds.textContent = newSeconds.toString();
+
+    const idToUse = "#" + this.clockId + "animation";
+    const watchElement = document.querySelector(idToUse) as HTMLElement;
+
+    if (this.isRotation) {
+      this.rotationAngle = this.rotationAngle + 10;
+      watchElement.style.transform = `rotate(${this.rotationAngle}deg)`;
+      for (let index = 0; index < this.multiplyTarget; index++) {
+        const newIdToUse = "#" + this.clockId + "Clone" + index;
+
+        const watchElement = document.querySelector(newIdToUse) as HTMLElement;
+        this.rotationAngle = this.rotationAngle + 10;
+        watchElement.style.transform = `rotate(${this.rotationAngle}deg)`;
+      }
+    }
+
+    if (this.isFlip) {
+      this.flip = this.flip * -1;
+      const flipX = "scaleX(" + this.flip + ")";
+      watchElement.style.transform = flipX;
+      watchElement.style.transition = "transform 0.3s ease-in-out";
+      for (let index = 0; index < this.multiplyTarget; index++) {
+        const newIdToUse = "#" + this.clockId + "Clone" + index;
+        const watchElement = document.querySelector(newIdToUse) as HTMLElement;
+        this.flip = this.flip * -1;
+        const flipY = "scaleY(" + this.flip + ")";
+        watchElement.style.transform = flipY;
+        watchElement.style.transition = "transform 0.3s ease-in-out";
+      }
+    }
+
+    if (this.isTranslating) {
+      const distanceX = 50;
+      this.translationX += distanceX;
+      watchElement.style.transform = `translateX(${this.translationX}px)`;
+
+      console.log("this.multiplyTarget : " + this.multiplyTarget);
+      
+      for (let index = 0; index < this.multiplyTarget; index++) {
+        const newIdToUse = "#" + this.clockId + "Clone" + index;
+        console.log("newIdToUse : " + newIdToUse);
+        
+        const watchElementClone = document.querySelector(
+          newIdToUse,
+        ) as HTMLElement;
+
+        const cloneDistanceX = 30;
+        const cloneTranslationX = index * cloneDistanceX;
+        watchElementClone.style.transform = `translateX(${cloneTranslationX}px)`;
+      }
+    }
   };
 
   public getMode(): number {
@@ -152,5 +214,66 @@ export class Diagram {
       this.actualFormat = "";
       this.format = "24h";
     }
+  }
+
+  public activateRotation() {
+    this.isRotation = !this.isRotation;
+    console.log("Rotate = " + this.isRotation);
+  }
+
+  public activateFlip() {
+    this.isFlip = !this.isFlip;
+    console.log("Flip = " + this.isFlip);
+  }
+
+  public multiply() {
+    const idToUse = "#" + this.clockId + "animation";
+    const watchElement = document.querySelector(idToUse) as HTMLElement;
+
+    this.multiplyTarget = this.multiplyTarget + 1;
+    console.log(this.multiplyTarget);
+
+    for (let i = 0; i < this.multiplyTarget; i++) {
+      const clone = watchElement.cloneNode(true) as HTMLElement;
+      clone.id = `${this.clockId}Clone${i}`;
+      clone.style.position = "absolute";
+
+      const distance =
+        100 * Math.floor(Math.random() * (this.multiplyTarget + 1));
+      const randomPosition = Math.floor(Math.random() * 9);
+      if (randomPosition === 1) {
+        clone.style.transform = `translate(${distance * i}px, ${
+          distance * i
+        }px)`;
+      } else if (randomPosition === 2) {
+        clone.style.transform = `translate(${distance * -i}px, ${
+          distance * i
+        }px)`;
+      } else if (randomPosition === 3) {
+        clone.style.transform = `translate(${distance * i}px, ${
+          distance * -i
+        }px)`;
+      } else if (randomPosition === 4) {
+        clone.style.transform = `translate(${distance * -i}px, ${
+          distance * -i
+        }px)`;
+      } else if (randomPosition === 5) {
+        clone.style.transform = `translate(${distance * i}px, 0px)`;
+      } else if (randomPosition === 6) {
+        clone.style.transform = `translate(${distance * -i}px, 0px)`;
+      } else if (randomPosition === 7) {
+        clone.style.transform = `translate(0px, ${distance * -i}px)`;
+      } else if (randomPosition === 8) {
+        clone.style.transform = `translate(0px, ${distance * -i}px)`;
+      }
+
+      console.log(clone);
+
+      watchElement.parentElement.appendChild(clone);
+    }
+  }
+
+  public activateTranslation() {
+    this.isTranslating = !this.isTranslating;
   }
 }
