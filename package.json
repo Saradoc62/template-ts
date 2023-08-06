@@ -1,7 +1,7 @@
 {
   "name": "template-ts",
   "version": "1.0.0",
-  "description": "",
+  "description": "Kata for GE Healcare application",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist/",
@@ -9,7 +9,8 @@
     "build": "npm run clean && webpack --mode production --config webpack.config.js",
     "start-node": "node dist/bundle.js",
     "start": "webpack serve --mode development --config webpack.config.js",
-    "all": "npm run build && npm run start"
+    "all": "npm run build && npm run start",
+    "format": "prettier --write \"**/*.{html,ts}\""
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +23,8 @@
     "typescript": "^4.2.4",
     "webpack": "^5.32.0",
     "webpack-cli": "^4.6.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "prettier": "3.0.1",
+    "prettier-plugin-packagejson": "2.4.5"
   }
 }

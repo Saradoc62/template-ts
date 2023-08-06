@@ -127,4 +127,3 @@ function getTimeDifferenceInHours(timeZone: string): number {
 
   return diff;
 }
-
