@@ -3,33 +3,34 @@
   "version": "1.0.0",
   "description": "Kata for GE Healcare application",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "clean": "rimraf dist/",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run clean && webpack --mode production --config webpack.config.js",
+    "test": "mocha dist/src/**/*_test.js",
+    "build": "npm run clean && webpack --mode production --config webpack.config.js && npx tsc",
     "start-node": "node dist/bundle.js",
     "start": "webpack serve --mode development --config webpack.config.js",
     "all": "npm run build && npm run start",
-    "format": "prettier --write \"**/*.{html,ts}\"  --ignore-path ./.eslintignore",
-    "lint": "npm run lint:eslint",
-    "lint:eslint": "eslint \"src/**/**.ts\""
+    "format": "prettier --write \"**/*.{html,ts}\""
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/chai": "^4.3.5",
+    "@types/mocha": "^10.0.1",
+    "chai": "^4.3.7",
     "css-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",
+    "mocha": "^10.2.0",
+    "prettier": "3.0.1",
+    "prettier-plugin-packagejson": "2.4.5",
     "rimraf": "^3.0.2",
     "style-loader": "^3.2.1",
     "ts-loader": "^8.1.0",
+    "ts-node": "^10.9.1",
     "typescript": "^4.2.4",
     "webpack": "^5.32.0",
     "webpack-cli": "^4.6.0",
-    "webpack-dev-server": "^3.11.2",
-    "prettier": "3.0.1",
-    "prettier-plugin-packagejson": "2.4.5",
-    "@typescript-eslint/eslint-plugin": "^6.2.1",
-    "@typescript-eslint/parser": "^6.2.1",
-    "eslint": "8.46.0"
+    "webpack-dev-server": "^3.11.2"
   }
 }
