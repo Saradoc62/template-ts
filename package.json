@@ -7,6 +7,7 @@
   "scripts": {
     "clean": "rimraf dist/",
     "test": "mocha dist/src/**/*_test.js",
+    "test:index": "mocha dist/src/*_test.js",
     "build": "npm run clean && webpack --mode production --config webpack.config.js && npx tsc",
     "start-node": "node dist/bundle.js",
     "start": "webpack serve --mode development --config webpack.config.js",
@@ -22,6 +23,7 @@
     "css-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",
     "mocha": "^10.2.0",
+    "playwright": "^1.36.2",
     "prettier": "3.0.1",
     "prettier-plugin-packagejson": "2.4.5",
     "rimraf": "^3.0.2",
