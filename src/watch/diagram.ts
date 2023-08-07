@@ -25,19 +25,28 @@ export class Diagram {
   private isTranslating = false;
   private translationX = 0;
 
+  // constants
+  private clockHourId = "#clockHour";
+  private clockMinutesId = "#clockMinutes";
+  private clockSecondId = "#clockSeconds";
+  private ampmId = "#amPm";
+  private dialId = "#dial";
+  private hFormat = "24h";
+  private amFormat = "AM";
+  private pmFormat = "PM";
+  private ampmFormat = "AM/PM";
+
   public initClock = () => {
     this.initDate = new Date();
     this.clockElement = document.getElementById(this.clockId);
-    console.log(this.clockId);
-
     this.initOffset = this.initOffset + this.addedHours;
   };
 
   public updateClock = () => {
     const hours = this.initDate.getHours().toString();
-    const clockHour = this.clockElement.querySelector("#clockHour")!;
+    const clockHour = this.clockElement.querySelector(this.clockHourId)!;
 
-    if (this.format === "24h") {
+    if (this.format === this.hFormat) {
       const newHour = (Number(hours) + this.addedHours) % this.oneDay24;
       clockHour.textContent = newHour.toString();
     } else {
@@ -46,13 +55,13 @@ export class Diagram {
     }
 
     const minutes = this.initDate.getMinutes().toString();
-    const clockMinutes = this.clockElement.querySelector("#clockMinutes")!;
+    const clockMinutes = this.clockElement.querySelector(this.clockMinutesId)!;
     const newMinutes = (Number(minutes) + this.addedMinutes) % this.oneMinute;
     clockMinutes.textContent = newMinutes.toString();
 
     this.addedSeconds = this.addedSeconds + 1;
     const seconds = this.initDate.getSeconds().toString();
-    const clockSeconds = this.clockElement.querySelector("#clockSeconds")!;
+    const clockSeconds = this.clockElement.querySelector(this.clockSecondId)!;
     const newSeconds = (Number(seconds) + this.addedSeconds) % this.oneMinute;
 
     if (newSeconds === 59) {
@@ -98,12 +107,9 @@ export class Diagram {
       this.translationX += distanceX;
       watchElement.style.transform = `translateX(${this.translationX}px)`;
 
-      console.log("this.multiplyTarget : " + this.multiplyTarget);
-      
       for (let index = 0; index < this.multiplyTarget; index++) {
         const newIdToUse = "#" + this.clockId + "Clone" + index;
-        console.log("newIdToUse : " + newIdToUse);
-        
+
         const watchElementClone = document.querySelector(
           newIdToUse,
         ) as HTMLElement;
@@ -132,23 +138,26 @@ export class Diagram {
     if (this.mode === 1) {
       console.log("Plus one hour");
       this.addedHours = this.addedHours + 1;
-      if (this.format !== "24h") {
+      if (this.format !== this.hFormat) {
         const clockHour = Number(
-          this.clockElement.querySelector("#clockHour")!.textContent,
+          this.clockElement.querySelector(this.clockHourId)!.textContent,
         );
-        const ampm = this.clockElement.querySelector("#amPm")!.textContent;
-        if (clockHour === 11 && ampm === "PM") {
-          this.clockElement.querySelector("#amPm")!.textContent = "AM";
-        } else if (clockHour === 12 && ampm === "AM") {
-          this.clockElement.querySelector("#amPm")!.textContent = "PM";
+        const ampm = this.clockElement.querySelector(this.ampmId)!.textContent;
+        if (clockHour === 11 && ampm === this.pmFormat) {
+          this.clockElement.querySelector(this.ampmId)!.textContent =
+            this.amFormat;
+        } else if (clockHour === 12 && ampm === this.amFormat) {
+          this.clockElement.querySelector(this.ampmId)!.textContent =
+            this.pmFormat;
         }
       }
       return;
     }
     if (this.mode === 2) {
       console.log("Plus one minute");
-      const clockMinutes =
-        this.clockElement.querySelector("#clockMinutes")!.textContent;
+      const clockMinutes = this.clockElement.querySelector(
+        this.clockMinutesId,
+      )!.textContent;
       if (clockMinutes === "59") {
         this.addedHours = this.addedHours + 1;
       }
@@ -158,7 +167,7 @@ export class Diagram {
   }
 
   public turnTheLight() {
-    const lightElement = this.clockElement.querySelector("#dial");
+    const lightElement = this.clockElement.querySelector(this.dialId);
 
     if (lightElement.classList.contains("day")) {
       lightElement.classList.remove("day");
@@ -173,46 +182,47 @@ export class Diagram {
     this.addedHours = this.initOffset;
     this.addedMinutes = 0;
     this.addedSeconds = 0;
-    this.clockElement.querySelector("#amPm")!.textContent = this.actualFormat;
+    this.clockElement.querySelector(this.ampmId)!.textContent =
+      this.actualFormat;
   }
 
   public changeAmPm() {
-    if (this.format === "24h") {
+    if (this.format === this.hFormat) {
       let clockHours = Number(
-        this.clockElement.querySelector("#clockHour")!.textContent,
+        this.clockElement.querySelector(this.clockHourId)!.textContent,
       );
-      let ampm = "AM";
+      let ampm = this.amFormat;
 
       if (clockHours >= 12) {
-        ampm = "PM";
+        ampm = this.pmFormat;
         clockHours %= 12;
       }
       if (clockHours === 0) {
         clockHours = 12;
       }
-      this.clockElement.querySelector("#amPm")!.textContent = ampm;
+      this.clockElement.querySelector(this.ampmId)!.textContent = ampm;
       this.actualFormat = ampm;
-      this.clockElement.querySelector("#clockHour")!.textContent =
+      this.clockElement.querySelector(this.clockHourId)!.textContent =
         clockHours.toString();
-      this.format = "AM/PM";
+      this.format = this.ampmFormat;
     } else {
       let clockHours = Number(
-        this.clockElement.querySelector("#clockHour")!.textContent,
+        this.clockElement.querySelector(this.clockHourId)!.textContent,
       );
-      const ampm = this.clockElement.querySelector("#amPm")!.textContent;
+      const ampm = this.clockElement.querySelector(this.ampmId)!.textContent;
 
-      if (ampm === "PM" && clockHours < 12) {
+      if (ampm === this.pmFormat && clockHours < 12) {
         clockHours += 12;
       }
 
-      if (ampm === "AM" && clockHours === 12) {
+      if (ampm === this.amFormat && clockHours === 12) {
         clockHours = 0;
       }
-      this.clockElement.querySelector("#clockHour")!.textContent =
+      this.clockElement.querySelector(this.clockHourId)!.textContent =
         clockHours.toString();
-      this.clockElement.querySelector("#amPm")!.textContent = "";
+      this.clockElement.querySelector(this.ampmId)!.textContent = "";
       this.actualFormat = "";
-      this.format = "24h";
+      this.format = this.hFormat;
     }
   }
 
@@ -231,7 +241,6 @@ export class Diagram {
     const watchElement = document.querySelector(idToUse) as HTMLElement;
 
     this.multiplyTarget = this.multiplyTarget + 1;
-    console.log(this.multiplyTarget);
 
     for (let i = 0; i < this.multiplyTarget; i++) {
       const clone = watchElement.cloneNode(true) as HTMLElement;
@@ -266,8 +275,6 @@ export class Diagram {
       } else if (randomPosition === 8) {
         clone.style.transform = `translate(0px, ${distance * -i}px)`;
       }
-
-      console.log(clone);
 
       watchElement.parentElement.appendChild(clone);
     }
