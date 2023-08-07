@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Kata for GE Healcare application",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "clean": "rimraf dist/",
     "test": "mocha dist/src/**/*_test.js",
