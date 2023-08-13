@@ -2,7 +2,7 @@ import { ChangeTime } from "../changeTime/change-time";
 import { NoEffectChangeTime } from "../changeTime/no-effect";
 import { PlusOneHourChangeTime } from "../changeTime/plus-one-hour";
 import { PlusOneMinuteChangeTime } from "../changeTime/plus-one-minute";
-import { ClockModeLabels } from "../model/clock-mode";
+import { ClockMode, ClockModeLabels } from "../model/clock-mode";
 import { format } from "../model/format";
 import { ids } from "../model/ids";
 
@@ -140,7 +140,7 @@ export class Diagram {
   public changeMode() {
     this.mode < 2 ? (this.mode = this.mode + 1) : (this.mode = 0);
     console.log(
-      "Mode : " + this.getMode() + ": " + ClockModeLabels.get(this.mode),
+      "Mode : " + ClockMode[this.mode] + ": " + ClockModeLabels.get(this.mode),
     );
   }
 
