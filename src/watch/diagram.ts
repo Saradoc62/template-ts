@@ -172,7 +172,6 @@ export class Diagram {
   public resetClock() {
     this.addedHours = this.initOffset;
     this.addedMinutes = 0;
-    this.addedSeconds = 0;
     this.clockElement.querySelector(ids.ampmId)!.textContent =
       this.actualFormat;
   }
