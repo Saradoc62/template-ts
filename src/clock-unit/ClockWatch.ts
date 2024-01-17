@@ -52,6 +52,13 @@ export class ClockWatch {
 
   onLightswitchPress(): void {
     this.isLightOn = !this.isLightOn;
+    
+    if(this.isLightOn){
+      this.applyLightMode();
+    }
+    else {
+      this.applyDarkMode();
+    }
   }
 
   onIncreasePress(): void {
@@ -84,6 +91,15 @@ export class ClockWatch {
     if(isHourChanging)
       this.hour.increase();
     this.updateTime();
+  }
+
+  
+  applyLightMode(): void {
+    //TODO
+  }
+
+  applyDarkMode(): void {
+    //TODO
   }
 }
   
