@@ -2,7 +2,9 @@ import { Hour } from "./components/Hour";
 import { Minute } from "./components/Minute";
 import { WatchMode, WatchModeType } from "./components/WatchMode";
 
-export class Clock {
+const numberOfMillisecondsInAMinute = 60000;
+
+export class ClockWatch {
   private readonly mode: WatchMode;
   private isLightOn: boolean;
   private readonly hour: Hour;
@@ -27,6 +29,8 @@ export class Clock {
     this.createButton('Mode', this.onModePress.bind(this));
     this.createButton('Increase', this.onIncreasePress.bind(this));
     this.createButton('Light switch', this.onLightswitchPress.bind(this));
+
+    setInterval(this.passMinute.bind(this), numberOfMillisecondsInAMinute);
   }
 
   private createButton(label: string, clickHandler: () => void) {
@@ -66,10 +70,14 @@ export class Clock {
   private updateTime() {
     const hours = this.hour.get().toString().padStart(2, '0');
     const minutes = this.minute.get().toString().padStart(2, '0');
-    console.log(hours);
-
     this.timeDisplay.textContent = `${hours}:${minutes}`;
   }
 
+  private passMinute() {
+    const isHourChanging = this.minute.increase();
+    if(isHourChanging)
+      this.hour.increase();
+    this.updateTime();
+  }
 }
   

@@ -10,8 +10,11 @@ export class Minute {
       return this.value;
     }
 
-    increase(): void {
-        this.value = (this.value + 1) % minute_threshold;
+    increase(): boolean {
+      // returns true if the threshold is reached and false otherwise
+      const newValue = this.value + 1
+      this.value = (newValue) % minute_threshold;
+      return newValue >= minute_threshold;
     }
   }
   
