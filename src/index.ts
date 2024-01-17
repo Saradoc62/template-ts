@@ -1,5 +1,4 @@
 import './index.css';
-import { MyClass } from './example-unit';
+import { ClockWatch } from './clock-unit';
 
-const a = new MyClass(2);
-console.log('number is', a.get());
+const clock = new ClockWatch('clock');
