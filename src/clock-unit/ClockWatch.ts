@@ -10,6 +10,7 @@ export class ClockWatch {
   private readonly hour: Hour;
   private readonly minute: Minute;
   private readonly container: HTMLDivElement;
+  private readonly buttonContainer: HTMLDivElement;
   private readonly timeDisplay: HTMLDivElement;
 
   constructor(containerId: string) {
@@ -23,7 +24,12 @@ export class ClockWatch {
     // Create time display element
     this.timeDisplay = document.createElement('div');
     this.container.appendChild(this.timeDisplay);
+    this.timeDisplay.classList.add('clock-digits');
     this.updateTime();
+
+    this.buttonContainer = document.createElement('div');
+    this.container.appendChild(this.buttonContainer);
+    this.buttonContainer.classList.add('button-container');
 
     // Create buttons
     this.createButton('Mode', this.onModePress.bind(this));
@@ -37,7 +43,7 @@ export class ClockWatch {
     const button = document.createElement('button');
     button.textContent = label;
     button.addEventListener('click', clickHandler);
-    this.container.appendChild(button);
+    this.buttonContainer.appendChild(button);
   }
 
   onModePress(): void {
