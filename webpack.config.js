@@ -2,36 +2,43 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: './src/index.ts',
-  devtool: 'source-map',
-  target: 'node',
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
-    ],
-  },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-  },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
-  plugins: [new HtmlWebpackPlugin({
-    title: 'GE Empty Template',
-    template: path.join(process.cwd(), 'src/index.html'),
-    filename: 'index.html',
-  })],
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      }
+    ]
+  },
+  resolve: {
+    extensions: ['.ts', '.js']
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html'
+    })
+  ],
   devServer: {
+    static: {
+      directory: path.join(__dirname, 'src'),
+    },
+    compress: true,
     host: '0.0.0.0',
-    port: '1234',
+    port: 1234,
+    allowedHosts: 'all',
+    hot: false,
+    liveReload: false,
   }
 };

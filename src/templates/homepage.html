@@ -1,0 +1,38 @@
+<p id="add-message">You can add as many clocks as you want!</p>
+<button id="add-button">Add Clock</button>
+<div id="clock-container">
+    <template id="clock-template">
+        <div class="clock-container">
+            <button id="display-mode-button" class="display-mode-button">Switch Display</button>
+            <div class="clock">
+                <!-- Clock hands container -->
+                <div class="clock-hands">
+                    <div class="hour-hand"></div>
+                    <div class="minute-hand"></div>
+                    <div class="second-hand"></div>
+                </div>
+
+                <!-- Time display (digital mode) -->
+                <div class="time-display">
+                    <span class="hours-display"></span>:
+                    <span class="minutes-display"></span>:
+                    <span class="seconds-display"></span>
+                </div>
+
+                <div class="timezone-wrapper">
+                    <span class="timezone-text">Time-Zone</span>
+                    <select class="timezone-select"></select>
+                </div>
+
+                <div class="buttons-container">
+                    <button class="mode-button">Mode</button>
+                    <button class="increase-button">Increase</button>
+                    <button class="light-button">Light</button>
+                    <button class="reset-button">Reset</button>
+                    <button class="format-button">AM/PM--24H</button>
+                </div>
+            </div>
+            <button class="delete-button">X</button>
+        </div>
+    </template>
+</div>
