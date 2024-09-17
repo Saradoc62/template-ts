@@ -1,0 +1,131 @@
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f9;
+}
+
+/* Center the time and buttons inside a circular container */
+#time-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.rectangle {
+    height: 50px;
+    width: 100px;
+    background-color: #555;
+  }
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Circular clock face */
+#clock-face {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 8px solid #333;
+    font-size: 32px;
+    font-weight: bold;
+    position: relative;
+    background-color: #bd00ff;
+}
+
+/* Rectangle contenant l'horloge et les boutons */
+#rectangle {
+    width: 452px;
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#time-background {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #FBE106; /* Default color */
+}
+
+/* Styling the time parts (hours, minutes, seconds) */
+#hours-part,
+#minutes-part {
+    font-size: 36px;
+}
+
+#seconds-part {
+    font-size: 24px; /* Smaller font size for seconds */
+    color: gray;
+}
+
+/* Position buttons around the clock face */
+.button-group {
+    position: absolute;
+    display: flex;
+    align-items: center;
+}
+
+/* Add 1 Hour button positioned at the top */
+#top-button {
+    top: 140px;
+    right: 283px;
+    transform: translateX(-50%);
+}
+
+/* Mode button positioned at the right */
+#right-button {
+    right: 349px;
+    top: 275px;
+    transform: translateY(-50%);
+}
+
+/* Change Background Color button positioned at the bottom */
+#bottom-button {
+    top: 144px;
+    right: 0;
+    transform: translateX(-50%);
+}
+
+/* Label styling */
+label {
+    margin-right: 15px;
+    font-size: 16px;
+    color: #333;
+}
+
+label {
+    margin-left: 15px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Styling the buttons */
+button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background-color: #333;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
