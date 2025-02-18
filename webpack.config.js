@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: './src/index.ts',
   devtool: 'source-map',
-  target: 'node',
+  target: 'web',
   module: {
     rules: [
       {
@@ -26,7 +26,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [new HtmlWebpackPlugin({
-    title: 'GE Empty Template',
+    title: 'Watch MVC for GEHC',
     template: path.join(process.cwd(), 'src/index.html'),
     filename: 'index.html',
   })],

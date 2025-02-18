@@ -6,8 +6,29 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
     <!-- support for mobile touch devices -->
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="./index.css">
+
 </head>
 <body>
-    <h1>Empty Page</h1>
+    <div id="watch-container">
+        <div id="watch">
+            <div id="clock-display" style="position: relative;">
+                <span id="hours">00</span>:<span id="minutes">00</span>
+                <span id="seconds" class="seconds-corner">00</span>
+            </div>
+              
+    
+          <button id="mode-btn"></button>
+          <button id="increase-btn"></button>
+          <button id="light-btn"></button>
+    
+
+          <span class="button-label mode-label">Mode</span>
+          <span class="button-label increase-label">Increase</span>
+          <span class="button-label light-label">Light</span>
+        </div>
+      </div>
+      <script src="bundle.js"></script>
+    
 </body>
 </html>

@@ -1,3 +1,111 @@
-h1 {
-    color: red;
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+#watch-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+#watch {
+    background-color: #55149C; 
+    border: 2px solid black;  
+    color: white;
+    padding: 20px;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+
+  button {
+    position: absolute;
+    padding: 6px;
+    border: none;
+    cursor: pointer;
+    background: #FBE106;
+    border-radius: 5px;
+    width: 2px;
+    height: 36px;
+  }
+  
+#mode-btn {
+    top: 0px;
+    right: 20px;
+    transform: translate(60%, 71%) rotate(-37deg);
+    border: 2px solid black;
+  }
+  
+  .mode-label {
+    top: 21px;
+    right: -30px;
+  }
+  
+  #increase-btn {
+    bottom: -3px;
+    right: 28px;
+    transform: translate(50%, -50%) rotate(44deg);
+    border: 2px solid black;
+  }
+  
+  .increase-label {
+    bottom: 9px;
+    right: -43px;
+  }
+  
+  #light-btn {
+    bottom: -4px;
+    left: 28px;
+    transform: translate(-50%, -50%) rotate(-44deg);
+    border: 2px solid black;
+  }
+  
+  .light-label {
+    bottom: 9px;
+    left: -16px;
+  }
+  
+
+  .button-label {
+    position: absolute;
+    font-size: 0.9em;
+    color: black;
+  }
+  
+  .blink {
+    animation: blink-animation 0.5s infinite alternate;
+  }
+  
+  @keyframes blink-animation {
+    from { opacity: 1; }
+    to { opacity: 0.3; }
+  }
+  
+
+  #clock-display {
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 1.8em;
+  }
+  .seconds-corner {
+    bottom: 5px;  
+    right: 5px;   
+    font-size: 0.7em; 
+    color: black; 
+  }
+  
