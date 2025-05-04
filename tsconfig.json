@@ -1,11 +1,16 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
+    "outDir": "./public/dist",
     "noImplicitAny": true,
     "module": "es6",
     "target": "es5",
     "moduleResolution": "node",
     "jsx": "react",
-    "allowJs": true
-  }
+    "allowJs": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/__tests__/*"]
 }

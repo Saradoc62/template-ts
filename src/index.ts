@@ -1,5 +1,4 @@
-import './index.css';
-import { MyClass } from './example-unit';
+import { MainController } from "./Controllers/mainWatchController";
 
-const a = new MyClass(2);
-console.log('number is', a.get());
+// Initialiser l'application
+new MainController();
